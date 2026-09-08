@@ -1,6 +1,7 @@
 import socket
 import os
 from dotenv import load_dotenv
+from fmsg import fmsg
 
 load_dotenv()
 
@@ -9,9 +10,14 @@ PORT = int(os.getenv("PORT", ""))
 
 socket_teste = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-socket_teste.bind((HOST, PORT)) # Associa o socket ao endereço e porta
+socket_teste.bind((HOST, PORT))
 
 print(f"Servidor UDP ouvindo em {HOST}:{PORT}")
 
 dados, endereco = socket_teste.recvfrom(1024)
-print(f"Mensagem recebida de {endereco}: {dados.decode()}")
+mensagem = dados.decode()
+
+print(f"Mensagem recebida de {endereco}: {mensagem}")
+
+resposta = fmsg(mensagem)
+socket_teste.sendto(str(resposta).encode(), endereco)
