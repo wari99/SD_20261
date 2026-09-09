@@ -1,18 +1,26 @@
 import socket
 import os
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 
 HOST = os.getenv("HOST", "")
 PORT = int(os.getenv("PORT", ""))
 
-socket_teste = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # socket UDP
+socket_teste = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-mensagem = "oiii"
+mensagem = "a"
 
-socket_teste.sendto(mensagem.encode(), (HOST, PORT)) # Envia a mensagem para o servidor
+inicio = time.perf_counter()
 
-print("Mensagem enviada ao servidor!")
+socket_teste.sendto(mensagem.encode(), (HOST, PORT))
+
+dados, endereco = socket_teste.recvfrom(1024)
+
+fim = time.perf_counter()
+
+print("Resposta do servidor:", dados.decode())
+print(f"RTT: {(fim - inicio) * 1000:.2f} ms")
 
 socket_teste.close()
