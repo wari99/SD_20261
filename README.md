@@ -9,13 +9,13 @@ O cliente envia uma mensagem para o servidor, que a processa conforme seu tipo e
 ---
 
 ### Estrutura do projeto
-
+```
 base_udp/
 
 ├── client.py      # Cliente UDP  
 ├── servidor.py    # Servidor UDP  
 ├── fmsg.py        # Processamento da mensagem
-
+```
 ---
 
 ### Configuração
