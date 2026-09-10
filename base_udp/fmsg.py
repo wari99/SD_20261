@@ -11,7 +11,7 @@ def fmsg(mensagem):
     if tipo == "int":
         resposta = valor + 1
     elif tipo == "char":
-        resposta = valor.upper()
+        resposta = valor.swapcase()
     elif tipo == "string":
         resposta = inverte_string(valor)
     else:
