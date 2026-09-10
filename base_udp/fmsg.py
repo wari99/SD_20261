@@ -5,18 +5,23 @@ def inverte_string(frase: str = ""):
     return aux
 
 def fmsg(mensagem):
+    tipo = mensagem["tipo"]
+    valor = mensagem["val"]
 
-    if mensagem.isdigit():
-        mensagem = int(mensagem)
-        resposta = mensagem + 1
-        tipo = "int"
-    elif len(mensagem)==1:
-        resposta = mensagem.upper()
-        tipo = "char"
+    if tipo == "int":
+        resposta = valor + 1
+    elif tipo == "char":
+        resposta = valor.upper()
+    elif tipo == "string":
+        resposta = inverte_string(valor)
     else:
-        resposta = inverte_string(mensagem)
-        tipo = "str"
+        resposta = "Tipo inválido"
 
-    print(f"Tipo: {type(mensagem)} / {tipo}, Mensagem: {mensagem}, Mensagem formatada: {resposta}")
+    print(
+        f"Tipo: {tipo}, Mensagem: {valor}, Mensagem formatada: {resposta}"
+    )
 
-    return resposta
+    return {
+        "tipo": tipo,
+        "val": resposta
+    }
