@@ -7,19 +7,22 @@ BUFFER_SIZE = 2048
 
 def menu(tipo):
     if tipo == "int":
-        valor = input("* Digite um número inteiro: ")
+        while True:
+            valor = input("Digite um número inteiro: ")
 
-        try:
-            return int(valor)
-        except ValueError:
-            print("Digite um número inteiro válido.")
+            try:
+                return int(valor)
+            except ValueError:
+                print("Digite um número inteiro válido.")
 
     elif tipo == "char":
-        valor = input("* Digite um caractere: ")
+        while True:
+            valor = input("Digite um caractere: ")
 
-        if len(valor) == 1:
-            return valor
-        print("Digite apenas UM caractere.")
+            if len(valor) == 1:
+                return valor
+
+            print("Digite apenas UM caractere.")
 
     elif tipo == "string":
         return input("Digite uma string: ")
@@ -47,7 +50,7 @@ while True:
     mensagem = {"tipo": tipo, "val": valor}
     mensagem_json = json.dumps(mensagem)
 
-    print(f"\n- - - - - -\nEnviando: {mensagem_json}")
+    print(f"\n- - - - - -\nEnviar a mensagem: {mensagem_json}")
 
     t_inicio = time.perf_counter() 
     socket_cliente.sendto(mensagem_json.encode(), ("127.0.0.1", porta))
